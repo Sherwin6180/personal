@@ -1,0 +1,79 @@
+/* Overview.css */
+
+.overview-container {
+    text-align: center;
+    color: #fff;
+}
+
+.intro-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.intro-text {
+    max-width: 500px;
+}
+
+.intro-text h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.intro-text p {
+    font-size: 18px;
+    color: #bbb;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.profile-picture img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #333;
+}
+
+.brands-section {
+    margin-top: 50px;
+}
+
+.brands-section p {
+    font-size: 18px;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.brands {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.brands img {
+    max-width: 150px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.brands img:hover {
+    opacity: 1;
+}
