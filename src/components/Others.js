@@ -18,10 +18,14 @@ const slideIn = keyframes`
 
 const Container = styled.div`
   width: 100%;
+  max-width: 100vw;
   padding: 20px;
   display: flex;
-  flex-direction: column;  /* Align sections vertically */
+  flex-direction: column; 
   gap: 20px; /* Adds margin between sections */
+  overflow-x: hidden;
+  overflow-y: auto; 
+  box-sizing: border-box;
 `;
 
 const Section = styled.div`

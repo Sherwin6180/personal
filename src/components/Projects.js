@@ -33,13 +33,19 @@ const Container = styled.div`
   width: 100%;
   padding: 20px;
   display: flex;
-  flex-direction: column;  // Ensures content flows vertically
-  align-items: flex-start;  // Aligns content to the start (left) of the container
+  flex-direction: column;
+  align-items: flex-start;
+
+  /* Remove white margins on small screens */
+  @media screen and (max-width: 768px) {
+    padding: 0;
+    margin: 0;
+  }
 `;
 
 const FilterContainer = styled.div`
   margin-bottom: 20px;
-  width: 100%;  // Ensure the filter container stretches across the width
+  width: 100%;
 `;
 
 const TagButton = styled.button`
@@ -50,9 +56,9 @@ const TagButton = styled.button`
   margin: 5px;
   border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
   display: inline-flex;
   align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
     background-color: ${highlightColor};
@@ -74,8 +80,13 @@ const Card = styled.div`
   color: #c9d1d9;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 100%;
-  position: relative;  // Allows absolute positioning of child elements
-  animation: ${floatUp} 1s ease-out;  // Apply the floating animation
+  position: relative;
+  animation: ${floatUp} 1s ease-out;
+
+  @media screen and (max-width: 768px) {
+    padding: 10px;
+    margin: 0 0 1em;
+  }
 `;
 
 const ProjectName = styled.h3`
@@ -83,6 +94,7 @@ const ProjectName = styled.h3`
   font-size: 1.5em;
   color: ${highlightColor};
   display: flex;
+  flex-wrap: wrap; /* Allow wrapping of the project name and status */
   align-items: center;
 `;
 
@@ -90,9 +102,9 @@ const StatusPill = styled.span`
   display: inline-flex;
   align-items: center;
   background-color: ${pillBackgroundColor};
-  color: #ddd;  // Lighter, more peaceful text color
-  font-size: 0.6em;  // Small font size
-  padding: 2px 8px;  // Adjusted padding to match the smaller font
+  color: #ddd;
+  font-size: 0.6em;
+  padding: 2px 8px;
   border-radius: 20px;
   margin-left: 10px;
 
@@ -104,13 +116,12 @@ const StatusPill = styled.span`
         display: inline-block;
         width: 8px;
         height: 8px;
-        background-color: green;  // Green light color
+        background-color: green;
         border-radius: 50%;
         margin-right: 5px;
-        animation: ${blink} 1.5s infinite;  // Apply blinking animation only to the green light
+        animation: ${blink} 1.5s infinite;
       }
-    `
-  }
+    `}
 
   a {
     color: inherit;
@@ -125,16 +136,23 @@ const StatusPill = styled.span`
 const ProjectTime = styled.p`
   font-size: 0.9em;
   color: #999;
-  position: absolute;  // Allows positioning relative to the Card component
-  top: 10px;  // Position near the top
-  right: 10px;  // Position near the right edge
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  @media screen and (max-width: 768px) {
+    position: static;
+    font-size: 0.8em;
+    margin-top: 5px;
+    text-align: right;
+  }
 `;
 
 const ProjectLink = styled.a`
   color: ${highlightColor};
   text-decoration: none;
-  font-size: 1.2em;  // Adjust the size
-  margin-top: 10px;  // Add some margin to separate it from other content
+  font-size: 1.2em;
+  margin-top: 10px;
   display: inline-flex;
   align-items: center;
 
@@ -142,7 +160,6 @@ const ProjectLink = styled.a`
     text-decoration: underline;
     color: ${highlightColor};
   }
-
 `;
 
 const Bullets = styled.ul`

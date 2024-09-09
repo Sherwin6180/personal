@@ -27,17 +27,6 @@ const bottomToTop = keyframes`
   }
 `;
 
-const leftToRight = keyframes`
-  from {
-    transform: translateX(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-`;
-
 const floatUp = keyframes`
   0% {
     opacity: 0;
@@ -56,11 +45,22 @@ const floatUp = keyframes`
 // Styled components
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal columns */
-  grid-template-rows: auto auto; /* Two rows */
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1em;
   height: 100%;
   width: 100%;
-  gap: 1em; /* Optional gap between grid items */
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; /* Stack name and photo in one column on small screens */
+    grid-template-rows: auto auto auto;
+    justify-items: center;
+  }
+
+  @media (max-width: 480px) {
+    justify-items: center;
+    padding: 10px;
+  }
 `;
 
 const NameContainer = styled.div`
@@ -69,6 +69,12 @@ const NameContainer = styled.div`
   align-self: start;
   justify-self: start;
   text-align: left;
+
+  @media (max-width: 768px) {
+    grid-column: 1 / 2;
+    justify-self: center;
+    text-align: center;
+  }
 `;
 
 const Name = styled.h1`
@@ -79,13 +85,14 @@ const Name = styled.h1`
 `;
 
 const ProfilePhoto = styled.div`
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-  align-self: start;
-  justify-self: end;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 768px) {
+    justify-self: center;
+    margin-bottom: 20px;
+  }
 `;
 
 const Photo = styled.img`
@@ -96,24 +103,15 @@ const Photo = styled.img`
   cursor: pointer;
 `;
 
-const BubbleContainer = styled.div`
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
-  align-self: start;
-  justify-self: end;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-`;
-
 const Bubble = styled.div`
   background-color: rgba(80, 80, 80, 0.8);
   color: #fff;
   padding: 8px;
   border-radius: 5px;
   font-size: 0.9em;
-  width: 150px; /* Match the width of the photo */
+  width: 150px;
   text-align: center;
+  margin-top: 10px;
   animation: ${floatUp} 3s;
 `;
 
@@ -123,7 +121,14 @@ const DescriptionContainer = styled.div`
   align-self: end;
   justify-self: start;
   text-align: left;
-  animation: ${leftToRight} 1s ease-in-out;
+  animation: ${slideIn} 1s ease-in-out;
+
+  @media (max-width: 768px) {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    text-align: center;
+    justify-self: center;
+  }
 `;
 
 const SocialLinks = styled.div`
@@ -132,6 +137,11 @@ const SocialLinks = styled.div`
   text-align: center;
   margin-top: 2em;
   animation: ${bottomToTop} 1s ease-in-out;
+
+  @media (max-width: 768px) {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+  }
 `;
 
 const SocialLink = styled.a`
@@ -163,20 +173,18 @@ function Overview() {
   return (
     <>
       <GridContainer>
-        <NameContainer>
-          <p>Hi, my name is</p>
-          <Name>Xinyu Liang.</Name>
-        </NameContainer>
         <ProfilePhoto>
           <Photo
             src="profile.PNG"
             alt="Your Name"
             onClick={() => setIsChatVisible(true)}
           />
-        </ProfilePhoto>
-        <BubbleContainer>
           {showBubble && <Bubble>Click on me to chat with my AI agent.</Bubble>}
-        </BubbleContainer>
+        </ProfilePhoto>
+        <NameContainer>
+          <p>Hi, my name is</p>
+          <Name>Xinyu Liang.</Name>
+        </NameContainer>
         <DescriptionContainer>
           <p>
             I'm a senior at Georgia Tech in the BSMS Computer Science program, with interests in <Highlight>AI</Highlight>, <Highlight>networking</Highlight>, <Highlight>systems</Highlight>, <Highlight>web development</Highlight>, etc. I’m passionate about innovation and optimization. Outside of work, I enjoy reading, music, building tools, and working out.

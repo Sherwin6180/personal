@@ -39,6 +39,12 @@ const Tabs = styled.div`
   margin-top: 4em; /* 4em margin from the top */
   gap: 2em; /* Space between tabs */
   animation: ${slideInFromTop} 0.7s ease-out;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column; /* Stack the tabs vertically on smaller screens */
+    gap: 1em;
+    display: ${props => (props.isOpen ? 'flex' : 'none')}; /* Hide tabs unless open */
+  }
 `;
 
 // Individual tab styling
@@ -70,20 +76,58 @@ const ContentWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  // justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    width: 90%; /* Take more width on smaller screens */
+  }
+`;
+
+// Burger menu icon for mobile
+const BurgerIcon = styled.div`
+  display: none;
+  cursor: pointer;
+  position: relative;
+  width: 30px;
+  height: 20px;
+  z-index: 999;
+  top: 20px;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+
+  div {
+    width: 100%;
+    height: 4px;
+    background-color: ${highlightColor};
+    margin: 5px 0;
+    transition: all 0.3s ease;
+  }
 `;
 
 function App() {
   const [activeTab, setActiveTab] = useState('Overview');
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to handle mobile menu toggle
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <Container>
-      <Tabs>
-        <Tab active={activeTab === 'Overview'} onClick={() => setActiveTab('Overview')}>Overview</Tab>
-        <Tab active={activeTab === 'Experience'} onClick={() => setActiveTab('Experience')}>Experience</Tab>
-        <Tab active={activeTab === 'Projects'} onClick={() => setActiveTab('Projects')}>Projects</Tab>
-        <Tab active={activeTab === 'Others'} onClick={() => setActiveTab('Others')}>Others</Tab>
+      <BurgerIcon onClick={toggleMenu}>
+        <div />
+        <div />
+        <div />
+      </BurgerIcon>
+
+      <Tabs isOpen={isMenuOpen}>
+        <Tab active={activeTab === 'Overview'} onClick={() => { setActiveTab('Overview'); setIsMenuOpen(false); }}>Overview</Tab>
+        <Tab active={activeTab === 'Experience'} onClick={() => { setActiveTab('Experience'); setIsMenuOpen(false); }}>Experience</Tab>
+        <Tab active={activeTab === 'Projects'} onClick={() => { setActiveTab('Projects'); setIsMenuOpen(false); }}>Projects</Tab>
+        <Tab active={activeTab === 'Others'} onClick={() => { setActiveTab('Others'); setIsMenuOpen(false); }}>Others</Tab>
       </Tabs>
+
       <ContentWrapper>
         {activeTab === 'Overview' && <Overview />}
         {activeTab === 'Experience' && <Experience />}

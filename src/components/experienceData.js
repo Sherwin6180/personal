@@ -17,7 +17,7 @@ const experiences = [
     {
       picture: "ndsu.png",
       company: "North Dakota State University (NDSU)",
-      role: "Undergradute Researcher",
+      role: "Undergraduate Researcher",
       location: "Fargo, ND",
       time: "May 2021 - Aug 2021",
       bullets: [
